@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/static/vue.js"></script>
+    <script src="/static/datav.map.vue.js"></script>
+    <link rel="stylesheet" href="/static/common.css">
+    <link rel="stylesheet" href="/static/button.css">
+    <title>OCR文字识别</title>
+    <style>
+        .screen-select {
+            padding-bottom: 20px;
+        }
+
+        .screen-select .screen-select-ul {
+            position: relative;  
+        }
+
+        .screen-select .screen-select-ul .select-slider-active {
+            position: absolute;
+            bottom: 0;
+            height: 5px;
+            width: 80px;
+            background-color: #fff;
+            border-radius: 5px;
+            transition: all .5s;
+            
+        }
+        .screen-select .screen-select-ul li.screen-select-item {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 40px 0;
+            line-height: 30px;
+            padding: 10px;
+            transition: all .5s;
+            color: #009bff;
+            text-shadow: 0 0 6px #000, 0 0 10px #000;   
+        }
+        .screen-select .screen-select-ul li.screen-select-item.active {
+            transform-origin: center center;
+            transform: scale(1.2);
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 6px #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <dv-full-screen-container>
+            <div style="margin-bottom: 10px;display: flex;justify-content: center;margin-top: 50px;">
+                <dv-decoration-1 style="width:15%;height:50px;margin-right: 10px;transform:rotate(180deg);">
+                </dv-decoration-1>
+                <h1 style="width:35%; font-size: 40px; text-align: center;color: aliceblue;font-weight: 600;">OCR文字识别</h1>
+                <dv-decoration-1 style="width:15%;height:50px;margin-left: 10px;"></dv-decoration-1>
+            </div>
+            <div style="margin: 0 auto;width: 840px;display: flex;justify-content: center;">
+                <div class="screen-select">
+                    <ul class="screen-select-ul">
+                        <div class="select-slider-active"></div>
+                        <li @click="handleClick" ref="hello" class="screen-select-item" data-mode="0">身份证识别</li>
+                        <li @click="handleClick" class="screen-select-item" data-mode="1">银行卡号提取</li>
+                        <li @click="handleClick" class="screen-select-item active" data-mode="2">图片转文字</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-bottom: 10px;height:100%;padding:20px;">
+                  <dv-border-box-10 :reverse="true"
+                        style="width:100%;height:auto;text-align: center;padding-bottom:35px;">
+                        <img src="/videostreamIpc" style="width:90%;height:50%;object-fit:fill;margin-top: 40px;"/>
+                    </dv-border-box-10>
+            </div>
+        </dv-full-screen-container>
+    </div>
+    <style>
+        #dv-full-screen-container {
+            background-image: url('/static/study-chart-bg.png');
+        }
+    </style>
+    <script src="/static/jquery-1.10.2.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            mounted() {
+
+                this.$nextTick(() => {
+                   setTimeout(() => {
+                        this.$refs["hello"].click();
+                   }, 0);
+                })
+                
+                
+            },
+            methods: {
+                handleClick(e){
+                    var _this = e.target;
+                    var clientWidth = _this.clientWidth;
+                    var offsetWidth = _this.offsetLeft;
+                    var sliderWidth = $(".screen-select-ul .select-slider-active").width();
+                    var transX = offsetWidth - (sliderWidth - clientWidth)/2;
+                    $(".screen-select-ul .select-slider-active").css(
+                        "transform", `translateX(${transX}px)`
+                    );
+                    $("ul.screen-select-ul li.screen-select-item").removeClass("active");
+                    $(_this).addClass("active");
+                    var mode = $(_this).attr("data-mode");
+                    var return_msg = {
+                        ocr_mode: Number(mode)
+                    } 
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/inData",
+                        //  新增content-type头部属性
+                        contentType: "application/json;charset=utf-8",
+                        data: JSON.stringify(return_msg),
+                        dataType: "JSON",
+                        success:function(data){
+                            console.log("切换成功");
+                        },
+                        error:function(jqXHR){
+                        }
+                    });
+                }
+            }
+        });        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,2 @@
+03-开发环境及软件工具资源包/balenaEtcher-Setup-1.5.59.exe filter=lfs diff=lfs merge=lfs -text
+03-开发环境及软件工具资源包/Miniconda3-py37_4.9.2-Linux-aarch64.sh filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,1 @@
+import tensorflow as tfx = tf.constant([3., 1., -3.])y = tf.nn.softmax(x)print('softmax_y:', y)print('softmax_sum:', tf.reduce_sum(y))

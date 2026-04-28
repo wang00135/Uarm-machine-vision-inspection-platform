@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="bj">
+    <file>bj.png</file>
+  </qresource>
+</RCC>

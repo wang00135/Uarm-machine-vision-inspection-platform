@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=工件分拣
+Exec=bash /home/bkrc/Desktop/05-综合实训项目/03机械臂分拣综合案例/05-工件分拣/run.sh
+Icon=/home/bkrc/Desktop/05-综合实训项目/03机械臂分拣综合案例/05-工件分拣/gongjian.png
+Path=/home/bkrc/Desktop/05-综合实训项目/03机械臂分拣综合案例/05-工件分拣
+Terminal=true
+Categories=Application
+Name[zh_CN]=gongjian_move.desktop

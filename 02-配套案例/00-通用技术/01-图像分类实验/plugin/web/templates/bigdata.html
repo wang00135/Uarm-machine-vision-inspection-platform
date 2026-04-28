@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据展示</title>
+    <link rel="stylesheet" href="/static/css/wodry.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/public.css">
+    <link rel="stylesheet" href="/static/css/button.css">
+
+    <script src="/static/js/jquery-1.10.2.js"></script>
+    <script>
+
+
+        $(document).ready(function () {
+            var whei = $(window).width()
+            $("html").css({ fontSize: whei / 22 });
+            $(window).resize(function () {
+                var whei = $(window).width();
+                $("html").css({ fontSize: whei / 22 })
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="main">
+    <div class="header">
+        <div class="header-left fl" id="time"></div>
+        <div class="header-center fl">
+            <div class="header-title">
+                智慧零售大数据展示
+            </div>
+            <div class="header-img"></div>
+        </div>
+        <div class="header-right fl"></div>
+        <div class="header-bottom fl"></div>
+
+    </div>
+
+    <div class="center">
+        <div class="center-left fl">
+            <div class="left-top rightTop border">
+                <!--<h1 id="ceshi">数据可视化</h1>-->
+                <div class="title">基本信息</div>
+                <div class="top-list">
+                    <p>
+                        来到超市如到家, 钞票为您节省花!
+                        <br/>
+                        卖得便宜，购得满意。美好生活，乐享乐购。方便社区邻里，满意街坊大众。服务无处不在，品质超越期待。一站式购物，零距离服务
+                    </p>
+                    <ul>
+                        <li>总收入：88314</li>
+                        <li>人流量：2223</li>
+                        <li>当天最高：4340</li>
+                        <li>人流量最高：1033</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="left-cen rightTop border">
+                <div class="title">本周区域收入排名</div>
+
+                <ul class="company" id="ceshi">
+
+                    <li class="wodryRX0">
+                        <span>NO.1</span>
+                        食品区，累计收入 1236元</li><br/>
+                    <li class="wodryRX4">NO.2
+                        水果区，累计收入 872元</li>
+                    <br/>
+                    <li class="wodryRX1">NO.3
+                        饮料区，累计收入 560元</li>
+                    <br/>
+                    <li class="wodryRX2">NO.4
+                        调味品区，累计收入 475元</li>
+                    <br/>
+                    <li class="wodryRX3">NO.5
+                        粮油区，累计收入 326元</li>
+<!--                    <br/>-->
+
+                </ul>
+
+            </div>
+            <div class="left-bottom rightTop border">
+                <div class="title">商品分类占比</div>
+                <div class="bottom-b">
+                    <div id="chart3" class="allnav"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="center-cen fl">
+            <div class="cen-top rightTop border">
+                <div class="swiper-container" id="wrapper" style="height: 100%;overflow: hidden">
+                    <div class="swiper-wrapper" style="height: 100%;">
+                        <div class="swiper-slide" style="height: 100%;text-align: center;">
+                            <img src="/videostreamIpc" alt="识别结果" style="height: 100%">
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination swiper-pagination-white"></div>
+                    <!--                            &lt;!&ndash; Add Arrows &ndash;&gt;-->
+                    <div class="swiper-button-next swiper-button-white"></div>
+                    <div class="swiper-button-prev swiper-button-white"></div>
+                </div>
+                <div class="bill" style="
+                    position: absolute;
+                    bottom: 10px;
+                    left: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 10px;
+                    background: rgba(0,72,115,0.28);
+                    border-radius: 10px;
+                ">
+                    <img src="/static/images/电子秤.png" alt="" style="width: 150px;">
+					<div class="bill-item" style="margin-bottom: 5px;">
+                        <div class="text-wrapper">
+                            <span>水果名</span>
+        
+                        </div>
+                        <input type="text" style="color: black" name="fruit">
+                    </div>
+                    <div class="bill-item" style="margin-bottom: 5px;">
+                        <div class="text-wrapper">
+                            <span>称重总量</span>
+                            <span>克</span>
+                        </div>
+                        <input type="number" style="color: black" name="weight">
+                    </div>
+                    <div class="bill-item" style="margin-bottom: 5px;">
+                        <div class="text-wrapper">
+                            <span>单价</span>
+                            <span>每千克元</span>
+                        </div>
+                        <input type="number" style="color: black" name="price">
+                    </div>
+
+                </div>
+                <button class="button button-primary button-rounded button-small settlement" style="position: absolute;bottom: 10px;right: 0;">
+                    结算
+                </button>
+            </div>
+            <div class="cen-bottom rightTop border">
+                <div class="title">月统计</div>
+                <div class="bottom-b">
+                    <div id="chart4" class="allnav"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="center-right fr">
+            <div class="right-top rightTop border">
+                <div class="title">商品销售额度排行</div>
+
+                <div class="echart wenzi">
+                    <div class="gun">
+                    <span>排名</span>
+                    <span>商品名称</span>
+                    <span>销量</span>
+                </div>
+                    <div id="FontScroll" class="myscroll">
+                        <ul>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>1</b>
+                                    </span>
+                                    <span>老汤卤煮火烧</span>
+                                    <span>4562元</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>2</b>
+                                    </span>
+                                    <span>贵州茅台酒(新飞天)</span>
+                                    <span>4125元</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>3</b>
+                                    </span>
+                                    <span>五粮春纯粮食酒1996</span>
+                                    <span>4100元</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>4</b>
+                                    </span>
+                                    <span>苏泊尔智能电饭煲</span>
+                                    <span>3989元</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>5</b>
+                                    </span>
+                                    <span>手表</span>
+                                    <span>3956元</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>6</b>
+                                    </span>
+                                    <span>真人发</span>
+                                    <span>3823元</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>7</b>
+                                    </span>
+                                    <span>手表</span>
+                                    <span>3723元</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>8</b>
+                                    </span>
+                                    <span>服饰配件</span>
+                                    <span>3500元</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>9</b>
+                                    </span>
+                                    <span>电脑</span>
+                                    <span>3412元</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>10</b>
+                                    </span>
+                                    <span>化妆品</span>
+                                    <span>3312元</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>11</b>
+                                    </span>
+                                    <span>女鞋</span>
+                                    <span>2856元</span>
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>12</b>
+                                    </span>
+                                    <span>礼品</span>
+                                    <span>2631元</span>
+
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="right-cen border">
+                <div class="title">各平台占比</div>
+                <div class="right-cen-cent">
+                    <div id="chart2" class="allnav"></div>
+                </div>
+
+            </div>
+            <div class="right-bottom rightTop border">
+                <div class="title">销售总量排比</div>
+                <div class="chat">
+                    <div id="chart5" class="allnav"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgb(0 0 0 / 80%);
+    ">
+    <div class="modal-wrapper" style="
+            background: rgb(255 255 255);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 1%;
+            display: flex;
+            flex-direction: column;
+            color: black;
+            box-sizing: border-box;
+            padding: 20px 10px;
+    ">
+        <p style="color: black;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 5px;
+        ">结算价格</p>
+        <p style="
+            color: black;
+            font-family: none;
+            text-align: center;
+            font-size: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #c3c3c3;
+        ">
+            ￥<span class="total-price" style="font-size: 21px;color: red;">88.95</span>
+        </p>
+        <div style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 8px;
+        ">
+            <p style="color: black;font-size: 16px;">请扫描二维码支付</p>
+            <img src="/static/images/guanwei.jpg" alt="" style="width: 80%;">
+        </div>
+
+        <img class="close" src="/static/images/s_ico3.png" alt="" style="position: absolute; right: 0; top: 0;width: 30px;height: 30px;">
+    </div>
+    </div>
+
+
+</div>
+
+<script src="/static/js/echarts-4.2.1.min.js"></script>
+<script src="/static/js/wodry.min.js"></script>
+<script src="/static/js/fontscroll.js"></script>
+<script src="/static/js/echarts.js"></script>
+<script src="/static/js/swiper-bundle.min.js"></script>
+<!--<script src="/static/js/mymap.js"></script>-->
+<script>
+    /*$('#ceshi').wodry({
+
+        animation: 'rotateX',
+
+        delay: 1000,
+
+        animationDuration: 800
+
+    });*/
+    /*window.onload = function () {
+        setInterval(function () {
+            var hs=document.getElementById("ceshi");
+            var hstyle=hs.style.transform;
+            if(hstyle=='rotateX(-360deg)'){
+                //console.log(1)
+                hs.style.transform='rotateX(0deg)';
+                hs.style.transform='transform 500ms cubic-bezier(0.55, 0.18, 0.92, 0.46) 0s;'
+            }else {
+                hs.style.transform='rotateX(-360deg)';
+                hs.style.transition="all 2s";
+            }
+        }, 5000);
+    };*/
+    var counter = 3000;
+    var ulist=document.getElementById("ceshi").getElementsByTagName("li");
+    for (var i=0;i<ulist.length;i++){
+        //console.log(ulist[i].className);
+        var liclass=ulist[i].className;
+        var a= $('.'+liclass+'').wodry({
+            animation: 'rotateX',
+            delay: counter,
+            animationDuration: 1000
+        });
+        if(counter>3050){
+            counter=3000;
+        }else {
+            counter +=10;
+        }
+        //console.log(counter);
+
+    }
+    $(function () {
+        $('.myscroll').myScroll({
+            speed: 60, //数值越大，速度越慢
+            rowHeight: 38 //li的高度
+        });
+    });
+
+    //顶部时间
+    function getTime(){
+        var myDate = new Date();
+        var myYear = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+        var myMonth = myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+        var myToday = myDate.getDate(); //获取当前日(1-31)
+        var myDay = myDate.getDay(); //获取当前星期X(0-6,0代表星期天)
+        var myHour = myDate.getHours(); //获取当前小时数(0-23)
+        var myMinute = myDate.getMinutes(); //获取当前分钟数(0-59)
+        var mySecond = myDate.getSeconds(); //获取当前秒数(0-59)
+        var week = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+        var nowTime;
+
+        nowTime = myYear+'-'+fillZero(myMonth)+'-'+fillZero(myToday)+'&nbsp;&nbsp;'+fillZero(myHour)+':'+fillZero(myMinute)+':'+fillZero(mySecond)+'&nbsp;&nbsp;'+week[myDay]+'&nbsp;&nbsp;';
+        //console.log(nowTime);
+        $('#time').html(nowTime);
+    };
+
+    function fillZero(str){
+        var realNum;
+        if(str<10){
+            realNum	= '0'+str;
+        }else{
+            realNum	= str;
+        }
+        return realNum;
+    }
+    setInterval(getTime,1000);
+
+</script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        spaceBetween: 30,
+        effect: 'fade',
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+    $(".settlement").click(function() {
+        var price = $(".bill input[name='price']").val();
+        var weight = $(".bill input[name='weight']").val();
+        if(!price || !weight) {
+            return;
+        }
+        price = Number(price);
+        weight = Number(weight);
+
+        $(".modal .total-price").html( Math.ceil(price * weight * 100) / 100);
+
+        $(".modal").show();
+    });
+
+    $(".modal .close").click(function() {
+        $(".modal").hide();
+    });
+
+    function getStatus() {
+        $.ajax({
+        type:"GET",
+        // url:"/static/js/test.json",
+        url: "/pluginStatus",
+        dataType:"json",
+            success:function(data){
+                if(data) {
+                    var fruit = data.fruit_class;
+                    var price = Number(data.fruit_m);
+                    var weight = Number(data.fruit_g);
+
+                    if (!fruit) {
+                        fruit = "";
+                    }
+                    if (!price) {
+                        price = 0;
+                    }
+                    if (!weight) {
+                        weight = 0;
+                    }
+                    $("input[name=fruit]").val(fruit);
+                    $("input[name=weight]").val(weight);
+                    $("input[name=price]").val(price);
+                }
+            },
+            error:function(jqXHR){
+            }
+        });
+    }
+    setInterval(getStatus, 2000);
+
+</script>
+
+</body>
+</html>
