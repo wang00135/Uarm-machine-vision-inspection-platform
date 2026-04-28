@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=机器视觉分拣
+Exec=bash /home/bkrc/Desktop/demo/uArm_move/run.sh
+Icon=/home/bkrc/Desktop/demo/uArm_move/sorting.png
+Path=/home/bkrc/Desktop/demo/uArm_move
+Terminal=true
+Categories=Application
